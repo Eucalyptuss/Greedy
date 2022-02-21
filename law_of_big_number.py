@@ -15,3 +15,47 @@ ex1) [2, 3, 5, 4, 6], M = 8, K = 3, result = 46
 ex2) [3, 4, 3, 4, 3], M = 7, K = 2, result = 28
 ex3) [2, 4, 5, 4, 6], M = 8, K = 3, result = 46
 '''
+
+class LawOfBigNumber:
+    def __init__(self, arr, m, k):
+        self.arr = arr
+        self.m = m
+        self.k = k
+
+    def check_values(self):
+        return self.arr, self.m, self.k
+
+    def add_arr(self, val):
+        self.arr.append(val)
+
+    def remove_arr(self, val):
+        self.arr.remove(val)
+
+    def calculation(self):
+        first_number, second_number = sorted(self.arr, reverse=True)[0], sorted(self.arr, reverse=True)[1]
+        result = first_number * (self.m - (self.m // self.k)) + second_number * (self.m // self.k)
+        # print((self.m - (self.m // self.k), (self.m % self.k)))
+        return result
+
+
+def test():
+    test1 = LawOfBigNumber([2, 3, 5, 4, 6], 8, 3)
+    print('test1 values: ', test1.check_values())
+    assert(test1.calculation() == 46)
+    test1.add_arr(7)
+    print('test1 values: ', test1.check_values())
+    assert(test1.calculation() == 54)
+    test1.remove_arr(7)
+    print('test1 values: ', test1.check_values())
+    assert (test1.calculation() == 46)
+    test2 = LawOfBigNumber([3, 4, 3, 4, 3], 7, 2)
+    print('test2 values: ', test2.check_values())
+    assert(test2.calculation() == 28)
+    test3 = LawOfBigNumber([2, 4, 5, 4, 6, 7], 8, 3)
+    print('test3 values: ', test3.check_values())
+    assert(test3.calculation() == 54)
+
+
+if __name__ == '__main__':
+    test()
+    # print('hello')
